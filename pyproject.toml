@@ -1,0 +1,107 @@
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13"]
+build-backend = "uv_build"
+
+[project]
+name = "photo-audit"
+version = "0.1.0"
+description = "Read-only auditing and comparison of large photo and video collections."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Alex C Warren", email = "alexcwarren.info@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+  # Add your project-specific runtime dependencies here
+]
+
+[project.scripts]
+photo-audit = "photo_audit.main:main"
+
+[project.urls]
+Documentation = "https://github.com/alexcwarren/photo-audit#readme"
+Issues = "https://github.com/alexcwarren/photo-audit/issues"
+Source = "https://github.com/alexcwarren/photo-audit"
+
+[dependency-groups]
+dev = [
+  "mypy",
+  "pytest",
+  "pytest-cov",
+  "pytest-randomly",
+  "ruff",
+]
+
+[tool.coverage.run]
+source_pkgs = ["photo_audit", "tests"]
+branch = true
+parallel = true
+
+[tool.coverage.paths]
+"photo_audit" = [
+  "src/photo_audit",
+  "*/photo-audit/src/photo_audit",
+]
+tests = ["tests", "*/photo_audit/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.ruff]
+line-length = 89
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle error
+  "W",   # pycodestyle warning
+  "F",   # Pyflakes
+  "I",   # isort
+  "N",   # pep8-naming
+  "D",   # pydocstyle
+  "UP",  # pyupgrade
+  "S",   # flake8-bandit
+  "B",   # flake8-bugbear
+  "A",   # flake8-builtins
+  "C4",  # flake8-comprehensions
+  "T20", # flake8-print
+  "PTH", # flake8-pathlib
+  "PIE", # flake8-pie
+  "RSE", # flake8-raise
+  "RET", # flake8-return
+  "SIM", # flake8-simplify
+  "ANN", # flake8-annotations
+]
+ignore = [
+  "D100", "D104", "D105", "D106", "D107", "D203", "D213", "D406", "D407", # Docstring rules
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+  "S101", # flake8-bandit: use of assert
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
