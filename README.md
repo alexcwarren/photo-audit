@@ -1,134 +1,62 @@
-# `photo-audit`
+# Photo Audit
 
-Read-only auditing and comparison of large photo and video collections.
+A read-only Python CLI for auditing, cataloging, and comparing
+large photo and video collections.
 
-## Getting started
+Photo Audit aims to help identify exact duplicates, compare
+collections across different storage devices, and discover
+files that may exist in only one location.
 
-### Prerequisites
+## Project Status
 
-Install [uv](https://docs.astral.sh/uv/) using its standalone installer.
+**Early development (pre-v0.1.0)**
 
-This project requires Python 3.12 or newer and pins its normal development interpreter in `.python-version`.
+The CLI foundation is established. Media scanning and
+auditing functionality are under development.
 
-uv can install the required Python version automatically when needed.
+## Safety
 
-### Set up the project
+Photo Audit is designed around a read-only approach.
 
-After cloning the repository:
+The tool will not delete, rename, move, overwrite, or
+modify the original media files being audited.
 
-```shell
-git clone https://github.com/alexcwarren/photo-audit.git
-cd photo-audit
+Scan results will be stored separately in a SQLite database.
+
+## Planned Features
+
+The initial release aims to provide:
+
+- Recursive discovery of photos and videos.
+- Filesystem and image metadata extraction.
+- Cryptographic file hashing.
+- Persistent SQLite storage.
+- Named collection sources.
+- Collection summaries.
+- Exact duplicate detection.
+- Comparison of different sources.
+- Identification of files unique to a particular source.
+
+Future releases may introduce similar-photo detection,
+incremental scanning, HTML reports, and archive validation.
+
+## Development Installation
+
+Requirements:
+
+- Python 3.12 or newer, subject to project configuration.
+- uv
+
+Clone the repository and install the development environment:
+
+```powershell
 uv sync
 ```
 
-`uv sync` creates the project virtual environment and installs the project plus its development dependencies.
+Verify the CLI:
 
-Manual virtual-environment activation is not required.
-
-## Running the project
-
-Run the generated console command with:
-
-```shell
-uv run photo-audit
+```powershell
+uv run photo-audit --help
 ```
 
-You can also run the module directly:
-
-```shell
-uv run python -m photo_audit.main
-```
-
-The starter application prints:
-
-```text
-Hello, World!
-```
-
-## Development
-
-### Run tests
-
-```shell
-uv run pytest
-```
-
-### Run tests with coverage
-
-```shell
-uv run pytest --cov=photo_audit --cov-report=term-missing
-```
-
-### Lint
-
-```shell
-uv run ruff check src tests
-```
-
-### Check formatting
-
-```shell
-uv run ruff format src tests --check
-```
-
-### Format code
-
-```shell
-uv run ruff format src tests
-```
-
-### Type check
-
-```shell
-uv run mypy src tests
-```
-
-## Run the routine checks
-
-Until a project-specific aggregate verification command is added, run:
-
-```shell
-uv run ruff check src tests
-uv run ruff format src tests --check
-uv run mypy src tests
-uv run pytest
-```
-
-## Dependency management
-
-Add a runtime dependency:
-
-```shell
-uv add <package>
-```
-
-Add a development dependency:
-
-```shell
-uv add --dev <package>
-```
-
-Remove a dependency:
-
-```shell
-uv remove <package>
-```
-
-Keep `pyproject.toml` and `uv.lock` together in version control.
-
-Do not commit `.venv`.
-
-## Build the package
-
-Build the source distribution and wheel with:
-
-```shell
-uv build
-```
-
-Artifacts are written to:
-
-```text
-dist/
-```
+See [README_DEV.md](README_DEV.md) for development instructions.
