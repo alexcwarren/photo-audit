@@ -22,10 +22,11 @@ classifiers = [
 ]
 dependencies = [
   # Add your project-specific runtime dependencies here
+  "typer>=0.27.2",
 ]
 
 [project.scripts]
-photo-audit = "photo_audit.main:main"
+photo-audit = "photo_audit.cli:app"
 
 [project.urls]
 Documentation = "https://github.com/alexcwarren/photo-audit#readme"
